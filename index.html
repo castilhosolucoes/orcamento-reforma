@@ -112,6 +112,7 @@ input[type=color]{width:100%;height:46px;border:1px solid #cdd3da;border-radius:
   #printSheet .wm{margin-top:20px;color:#888;font-size:11px}
 }
 </style>
+<script>(function(){var B='https://abacus.jasoncameron.dev/hit/castilhosolucoes/',L=location.pathname.split('/').filter(Boolean),P=(L[0]||'raiz').replace('orcamento-','');if(P==='links')P=(L[1]==='obrigado'?'obrigado':'hub');function h(k){try{fetch(B+P+'-'+k,{mode:'no-cors',keepalive:true}).catch(function(){})}catch(e){}}function o(k){try{if(sessionStorage.getItem('c_'+k))return;sessionStorage.setItem('c_'+k,'1')}catch(e){}h(k)}o('visita');document.addEventListener('input',function(){o('uso')},true);document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('a,button');if(!t)return;var s=((t.textContent||'')+' '+(t.getAttribute('href')||'')).toLowerCase();if(s.indexOf('hotmart')>-1)h('clique-compra');else if(s.indexOf('pdf')>-1)h('pdf')},true)})();</script>
 </head>
 <body>
 <noscript><p style="padding:20px">Ative o JavaScript do navegador para usar o app.</p></noscript>
