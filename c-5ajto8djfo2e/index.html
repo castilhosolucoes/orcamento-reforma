@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b91c1c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Orçamento Reforma">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Orçamento de Pedreiro e Reforma em 1 Minuto</title>
+<style>
+:root{
+  --pri:#b91c1c; --pri-d:#7f1d1d; --bg:#f3f5f7; --card:#fff; --ink:#18202a; --mut:#6b7684;
+  --line:#e2e6ea; --warn:#b45309; --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:12px 12px 120px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:10px 4px 12px}
+.top h1{font-size:21px;line-height:1.2;margin:0}
+.top .sub{margin:4px 0 0;color:var(--mut);font-size:14px}
+.badge{background:#fef3c7;color:#92400e;font-weight:700;font-size:12px;padding:4px 9px;border-radius:99px;white-space:nowrap}
+.card{background:var(--card);border-radius:var(--r);box-shadow:0 1px 2px rgba(16,24,40,.06);margin:0 0 12px;overflow:hidden}
+.card>summary,.card>h2{list-style:none;font-size:17px;font-weight:700;margin:0;padding:15px 16px;cursor:pointer;display:block}
+.card>summary::-webkit-details-marker{display:none}
+.card>summary::after{content:"▾";float:right;color:var(--mut)}
+.card[open]>summary::after{content:"▴"}
+.card>h2{cursor:default}
+.body{padding:0 16px 16px}
+.f{display:block;margin:0 0 10px}
+.f>span{display:block;font-size:13px;color:var(--mut);margin:0 0 4px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid #cdd3da;border-radius:10px;padding:11px 12px;min-height:46px;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,#6b7684 50%),linear-gradient(135deg,#6b7684 50%,transparent 50%);background-position:calc(100% - 18px) 20px,calc(100% - 13px) 20px;background-size:5px 5px;background-repeat:no-repeat;padding-right:30px}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:0;border-color:var(--pri)}
+input[type=color]{width:100%;height:46px;border:1px solid #cdd3da;border-radius:10px;padding:3px;background:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:700;font-size:16px;min-height:46px;padding:0 16px;border-radius:12px;border:1px solid var(--pri);background:#fff;color:var(--pri);cursor:pointer;text-decoration:none;text-align:center}
+.btn.primary{background:var(--pri);color:#fff}
+.btn.primary:active{background:var(--pri-d)}
+.btn.ghost{border-color:#cdd3da;color:var(--ink);font-weight:600}
+.btn.small{min-height:38px;font-size:14px;padding:0 12px}
+.btn.block{display:flex;width:100%;margin:0 0 10px}
+.btn:disabled{opacity:.55}
+.hint{font-size:13px;color:var(--mut);margin:6px 0 0}
+.logoRow{display:flex;gap:14px;align-items:center;margin:0 0 6px}
+.logoBox{width:112px;height:72px;border:1px dashed #b7c0c9;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fafbfc;overflow:hidden;color:var(--mut);font-size:12px;text-align:center;padding:4px;flex:0 0 auto}
+.logoBox img{max-width:100%;max-height:100%;display:block}
+.logoBtns{display:flex;flex-direction:column;gap:8px}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+.room{border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px;background:#fcfdfd}
+.rhead{display:flex;gap:8px;margin:0 0 10px}
+.rname{font-weight:700}
+.chk{display:flex;align-items:center;gap:10px;margin:2px 0 8px;font-size:16px;min-height:40px}
+.chk input{width:22px;height:22px;accent-color:var(--pri)}
+.adv>summary{font-size:14px;color:var(--pri);cursor:pointer;margin:2px 0 8px}
+.res{margin-top:8px;padding:10px 12px;background:#fef2f2;border-radius:10px;color:#7f1d1d;font-size:15px}
+.res.empty{background:#f3f4f6;color:var(--mut)}
+.sum{width:100%;border-collapse:collapse}
+.sum td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.sum td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:10px}
+.sum tr.tot td{border-bottom:0;font-size:19px;padding-top:12px;color:var(--pri)}
+.sum small{display:block;color:var(--mut);font-weight:400;font-size:13px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:20}
+.bar small{display:block;font-size:12px;color:var(--mut)}
+.bar strong{font-size:22px}
+.bar .btn{flex:0 0 auto;min-width:150px}
+.foot{display:grid;gap:8px;margin:6px 0 0}
+.ov{position:fixed;inset:0;background:rgba(15,23,32,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.ov.show{display:flex}
+.mdl{background:#fff;width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:20px 18px calc(18px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto}
+.mdl h2{margin:0 0 8px;font-size:20px}
+.mdl p{margin:0 0 12px}
+.mdl ul{margin:0 0 14px;padding-left:20px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#18202a;color:#fff;padding:11px 16px;border-radius:12px;font-size:15px;z-index:60;max-width:90%;display:none;text-align:center}
+.toast.show{display:block}
+.warn{background:#fffbeb;color:var(--warn);border-radius:10px;padding:10px 12px;font-size:14px;margin:0 0 12px;display:none}
+#printSheet{display:none}
+@media print{
+  body>*:not(#printSheet){display:none !important}
+  body{background:#fff}
+  #printSheet{display:block;font:13px/1.4 Arial,Helvetica,sans-serif;color:#111;padding:0}
+  #printSheet h1{font-size:22px;margin:0}
+  #printSheet table{width:100%;border-collapse:collapse;margin:8px 0 14px}
+  #printSheet th{background:#b91c1c;color:#fff;text-align:left;padding:6px}
+  #printSheet td{padding:6px;border-bottom:1px solid #ddd;vertical-align:top}
+  #printSheet .r{text-align:right}
+  #printSheet .tot td{font-size:17px;font-weight:700;border-top:2px solid #b91c1c}
+  #printSheet img{max-height:70px;max-width:170px}
+  #printSheet .wm{margin-top:20px;color:#888;font-size:11px}
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px">Ative o JavaScript do navegador para usar o app.</p></noscript>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1 data-t="appTitle"></h1>
+      <p class="sub" data-t="appSub"></p>
+    </div>
+    <span class="badge" id="demoBadge" data-t="demoBadge"></span>
+  </header>
+  <a class="btn primary block" id="buyTop" target="_blank" rel="noopener" style="display:none"></a>
+  <div id="addHome" style="display:none;margin:10px 0;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;color:#0f172a;font-size:13px;line-height:1.45">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><b>Deixe este app no seu celular, como um ícone</b><button type="button" id="addHomeX" aria-label="Fechar" style="border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:#475569;padding:0 4px">×</button></div>
+    <div style="margin-top:4px"><b>Android (Chrome):</b> toque nos três pontinhos ⋮ e em "Adicionar à tela inicial".<br><b>iPhone (Safari):</b> toque no botão de compartilhar (quadrado com seta) e em "Adicionar à Tela de Início".</div>
+  </div>
+  <script>(function(){try{var b=document.getElementById("addHome");if(!b)return;var st=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone;var dis=false;try{dis=localStorage.getItem("addHomeX")==="1";}catch(e){}if(!st&&!dis)b.style.display="";document.getElementById("addHomeX").onclick=function(){b.style.display="none";try{localStorage.setItem("addHomeX","1");}catch(e){}};}catch(e){}})();</script>
+
+  <div class="warn" id="storWarn" data-t="storageWarn"></div>
+
+  <details class="card" id="cProfile">
+    <summary data-t="profileTitle"></summary>
+    <div class="body">
+      <div class="logoRow">
+        <div class="logoBox" id="logoBox"><span data-t="noLogo"></span></div>
+        <div class="logoBtns">
+          <label class="btn small" for="logoFile" data-t="logoPick"></label>
+          <input class="vh" type="file" id="logoFile" accept="image/*">
+          <button class="btn small ghost" id="logoDel" type="button" data-t="logoRemove"></button>
+        </div>
+      </div>
+      <p class="hint" data-t="logoHint"></p>
+      <label class="f" style="margin-top:12px"><span data-t="nameLabel"></span>
+        <input id="pName" type="text" data-ph="namePh" autocomplete="organization" maxlength="60"></label>
+      <div class="grid2">
+        <label class="f"><span data-t="phoneLabel"></span>
+          <input id="pPhone" type="text" inputmode="tel" data-ph="phonePh" autocomplete="tel" maxlength="30"></label>
+        <label class="f"><span data-t="colorLabel"></span>
+          <input id="pColor" type="color" value="#b91c1c"></label>
+      </div>
+    </div>
+  </details>
+
+  <details class="card" open>
+    <summary data-t="clientTitle"></summary>
+    <div class="body">
+      <label class="f"><span data-t="clientNameLabel"></span>
+        <input id="cName" type="text" data-ph="clientNamePh" autocomplete="off" maxlength="80"></label>
+      <label class="f"><span data-t="clientAddrLabel"></span>
+        <input id="cAddr" type="text" data-ph="clientAddrPh" autocomplete="off" maxlength="120"></label>
+    </div>
+  </details>
+
+  <details class="card" open>
+    <summary data-t="roomsTitle"></summary>
+    <div class="body">
+      <div id="rooms"></div>
+      <button class="btn block" id="btnAdd" type="button"></button>
+    </div>
+  </details>
+
+  <details class="card" open>
+    <summary data-t="pricesTitle"></summary>
+    <div class="body">
+      <div class="grid2">
+        <label class="f"><span data-t="labAlvLabel"></span>
+          <input id="prLabAlv" type="text" inputmode="decimal"></label>
+        <label class="f"><span data-t="labRebLabel"></span>
+          <input id="prLabReb" type="text" inputmode="decimal"></label>
+      </div>
+      <div class="grid2">
+        <label class="f"><span data-t="labConLabel"></span>
+          <input id="prLabCon" type="text" inputmode="decimal"></label>
+        <label class="f"><span data-t="labImpLabel"></span>
+          <input id="prLabImp" type="text" inputmode="decimal"></label>
+      </div>
+      <div class="grid2">
+        <label class="f"><span data-t="labDemLabel"></span>
+          <input id="prLabDem" type="text" inputmode="decimal"></label>
+        <label class="f"><span data-t="extraLabel"></span>
+          <input id="prExtra" type="text" inputmode="decimal" placeholder="0,00"></label>
+      </div>
+      <details class="adv" open>
+        <summary data-t="matTitle"></summary>
+        <div class="grid2">
+          <label class="f"><span data-t="blockLabel"></span><input id="prBlock" type="text" inputmode="decimal"></label>
+          <label class="f"><span data-t="cementLabel"></span><input id="prCement" type="text" inputmode="decimal"></label>
+          <label class="f"><span data-t="sandLabel"></span><input id="prSand" type="text" inputmode="decimal"></label>
+          <label class="f"><span data-t="imperLabel"></span><input id="prImper" type="text" inputmode="decimal"></label>
+        </div>
+        <p class="hint" data-t="matHint"></p>
+      </details>
+      <div class="grid2" style="margin-top:10px">
+        <label class="f"><span data-t="validLabel"></span>
+          <input id="prValid" type="text" inputmode="numeric" placeholder="7"></label>
+      </div>
+      <label class="f"><span data-t="payLabel"></span>
+        <input id="prPay" type="text" maxlength="120"></label>
+      <label class="f"><span data-t="notesLabel"></span>
+        <textarea id="prNotes" data-ph="notesPh" maxlength="400"></textarea></label>
+    </div>
+  </details>
+
+  <section class="card">
+    <h2 data-t="summaryTitle"></h2>
+    <div class="body" id="sum"></div>
+  </section>
+
+  <div class="foot">
+    <button class="btn ghost" id="btnNew" type="button" data-t="btnNew"></button>
+    <button class="btn ghost" id="btnExport" type="button" data-t="btnExport"></button>
+    <label class="btn ghost" for="importFile" data-t="btnImport"></label>
+    <input class="vh" type="file" id="importFile" accept="application/json,.json">
+    <p class="hint" data-t="footHint"></p>
+  </div>
+</div>
+
+<div class="bar">
+  <div><small data-t="totalLabel"></small><strong id="barTotal">R$ 0,00</strong></div>
+  <button class="btn primary" id="btnPdf" type="button" data-t="btnPdf"></button>
+</div>
+
+<div class="ov" id="ov"><div class="mdl" id="mdl"></div></div>
+<div class="toast" id="toast"></div>
+<div id="printSheet"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* =====================================================================
+   CONFIGURAÇÃO — para a VERSÃO COMPLETA: demo:false, maxRooms:20 e buyUrl
+   ===================================================================== */
+var CONFIG = {
+  demo: false,
+  maxRooms: 20,
+  lang: 'pt',
+  locale: 'pt-BR',
+  currency: 'BRL',
+  buyUrl: 'https://pay.hotmart.com/U108507432E',
+  storageKey: 'orcreforma_v1',
+  jsPdfUrls: [
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js'
+  ],
+  defaults: { doorM2: 1.7, windowM2: 1.5,
+    alvBlocks: 25, alvWastePct: 5, alvCem: 0.06, alvSand: 0.014,
+    rebCem: 0.18, rebSand: 0.03,
+    conCemCm: 0.066, conSandCm: 0.011,
+    impKg: 4, impBucketKg: 18, validityDays: 7 }
+};
+var D = CONFIG.defaults;
+
+/* =====================================================================
+   TEXTOS (para clonar em outro idioma: copie o bloco "pt" e traduza)
+   ===================================================================== */
+var L = { pt: {
+  appTitle: 'Orçamento de Pedreiro e Reforma em 1 Minuto',
+  appSub: 'Digite as medidas, veja blocos, cimento e areia e mande o PDF com a sua logo.',
+  demoBadge: 'DEMO',
+  storageWarn: 'Seu navegador não está salvando dados (aba anônima?). Você pode usar o app, mas ao fechar a página os dados somem.',
+  profileTitle: '1. Seus dados (aparecem no PDF)',
+  noLogo: 'Sem logo',
+  logoPick: 'Escolher logo',
+  logoRemove: 'Remover logo',
+  logoHint: 'Foto ou imagem da sua logo. Fica salva só neste celular.',
+  nameLabel: 'Seu nome ou empresa',
+  namePh: 'Ex.: João Reformas e Construção',
+  phoneLabel: 'WhatsApp / telefone',
+  phonePh: '(31) 99999-9999',
+  colorLabel: 'Cor do PDF',
+  clientTitle: '2. Cliente',
+  clientNameLabel: 'Nome do cliente',
+  clientNamePh: 'Ex.: Maria Souza',
+  clientAddrLabel: 'Endereço ou obra',
+  clientAddrPh: 'Ex.: Rua das Flores, 120 - Savassi',
+  roomsTitle: '3. Ambiente e serviço',
+  roomName: 'Nome do ambiente',
+  room1: 'Sala',
+  roomN: 'Ambiente',
+  roomFallback: 'Ambiente',
+  roomDel: 'Remover',
+  typeLabel: 'Tipo de serviço',
+  t_alv: 'Alvenaria (levantar parede)',
+  t_reb: 'Reboco (chapisco e emboço)',
+  t_con: 'Contrapiso',
+  t_imp: 'Impermeabilização',
+  t_dem: 'Demolição',
+  fL: 'Comprimento (m)', fW: 'Largura (m)', fH: 'Altura (m)',
+  fDoors: 'Portas', fWins: 'Janelas',
+  fFaces: 'Faces rebocadas (1 a 4)',
+  fCm: 'Espessura (cm)',
+  addRoom: '+ Adicionar ambiente',
+  addRoomLocked: '🔒 Adicionar mais ambientes (versão completa)',
+  estHint: 'Estimativa por m² (blocos com 5% de perda). Desconta 1,7 m² por porta e 1,5 m² por janela nas paredes. Cimento e areia mudam com o traço e a espessura: confira na obra.',
+  resArea: 'Área', resBlocks: 'blocos', resCem: 'sacos de cimento',
+  resEmpty: 'Preencha as medidas para calcular.',
+  pricesTitle: '4. Preços e condições',
+  labAlvLabel: 'Mão de obra: alvenaria (R$/m²)',
+  labRebLabel: 'Mão de obra: reboco (R$/m²)',
+  labConLabel: 'Mão de obra: contrapiso (R$/m²)',
+  labImpLabel: 'Mão de obra: impermeabilização (R$/m²)',
+  labDemLabel: 'Mão de obra: demolição (R$/m²)',
+  extraLabel: 'Outros materiais (R$)',
+  matTitle: 'Preços dos materiais',
+  matHint: 'Valores de exemplo. Troque pelos preços da loja onde você compra.',
+  blockLabel: 'Bloco cerâmico 9x19x19 (R$/un)',
+  cementLabel: 'Cimento, saco 50 kg (R$)',
+  sandLabel: 'Areia média (R$/m³)',
+  imperLabel: 'Impermeabilizante, balde 18 kg (R$)',
+  validLabel: 'Validade (dias)',
+  payLabel: 'Forma de pagamento',
+  paymentDefault: '40% na entrada e o restante conforme o andamento da obra',
+  notesLabel: 'Observações',
+  notesPh: 'Ex.: Inclui mão de obra e material. Não inclui retirada de entulho nem acabamento.',
+  summaryTitle: 'Resumo',
+  sMat: 'Materiais',
+  sExtra: 'Outros materiais',
+  sTotal: 'Total',
+  sNoData: 'Preencha as medidas para ver o resumo.',
+  totalLabel: 'Total do orçamento',
+  btnPdf: 'Gerar PDF',
+  btnNew: 'Novo orçamento (limpar cliente e ambientes)',
+  btnExport: 'Salvar backup dos meus dados',
+  btnImport: 'Restaurar backup',
+  footHint: 'Seus dados ficam apenas neste aparelho. Se trocar de celular, use o backup.',
+  confirmNew: 'Começar um novo orçamento? Cliente e ambientes serão limpos (seus dados e preços ficam).',
+  needData: 'Preencha as medidas do ambiente.',
+  logoError: 'Não consegui ler essa imagem. Tente outra (JPG ou PNG).',
+  backupOk: 'Backup restaurado.',
+  backupBad: 'Arquivo de backup inválido.',
+  pdfFail: 'Não foi possível gerar o PDF agora.',
+  paywallTitle: 'Versão completa',
+  paywallBody: 'Esta demonstração calcula 1 ambiente por orçamento e marca o PDF como demonstração.',
+  paywallList: ['Quantos ambientes quiser no mesmo orçamento', 'PDF limpo, sem a marca de demonstração', 'Pagamento único, sem mensalidade'],
+  paywallBuy: 'Quero a versão completa',
+  buyTop: 'Comprar versão completa · R$ 27 (pagamento único)',
+  paywallNoLink: 'Peça o link da versão completa a quem te enviou esta demonstração.',
+  close: 'Fechar',
+  resTitle: 'PDF pronto',
+  btnShare: 'Enviar / compartilhar (WhatsApp)',
+  btnDownload: 'Baixar PDF',
+  btnOpen: 'Abrir PDF',
+  resHint: 'No iPhone, se o download não começar, use "Abrir PDF" e depois o botão de compartilhar do Safari.',
+  shareFail: 'Não consegui abrir o compartilhamento. Use "Baixar PDF".',
+  fbTitle: 'Sem conexão com o gerador de PDF',
+  fbBody: 'Não consegui carregar o gerador de PDF (sem internet?). Você pode imprimir e escolher "Salvar como PDF".',
+  fbPrint: 'Imprimir / salvar como PDF',
+  // textos que vão para dentro do PDF (evite símbolos fora do Latin-1)
+  yourNameFallback: 'Orçamento de reforma e construção',
+  pdfTitle: 'ORÇAMENTO',
+  pdfNumber: 'Nº',
+  pdfDate: 'Data',
+  pdfValid: 'Válido até',
+  pdfClient: 'Cliente',
+  pdfService: 'Serviço',
+  pdfValues: 'Mão de obra e materiais',
+  pdfMaterials: 'Lista de materiais (estimativa)',
+  pdfConditions: 'Condições',
+  pdfColRoom: 'Ambiente',
+  pdfColScope: 'Serviço',
+  pdfColArea: 'Medida',
+  scAlv: 'Alvenaria de bloco cerâmico',
+  scReb: 'Reboco (chapisco e emboço)',
+  scFace: 'face',
+  scFaces: 'faces',
+  scCon: 'Contrapiso de',
+  scImp: 'Impermeabilização',
+  scDem: 'Demolição',
+  lineLabour: 'Mão de obra',
+  lineMaterials: 'Materiais',
+  lineMatDetail: 'Conforme lista de materiais abaixo',
+  lineExtra: 'Outros materiais',
+  pdfTotal: 'TOTAL',
+  pdfPayment: 'Pagamento',
+  pdfValidity: 'Validade desta proposta',
+  pdfDays: 'dias',
+  pdfNotes: 'Observações',
+  pdfEstimate: 'As quantidades de material são estimativas por m² (5% de perda nos blocos) e variam conforme o traço, a espessura e as condições da obra. Retirada de entulho não está incluída, salvo indicação.',
+  pdfGenerated: 'Orçamento gerado em',
+  pdfPage: 'Página',
+  pdfDemoFooter: 'Gerado com a versão DEMONSTRAÇÃO de Orçamento de Pedreiro e Reforma em 1 Minuto',
+  pdfWatermark: 'DEMONSTRAÇÃO',
+  u_block: 'Bloco cerâmico 9x19x19',
+  u_cement: 'Cimento (saco de 50 kg)',
+  u_sand: 'Areia média',
+  u_imper: 'Impermeabilizante (balde de 18 kg)',
+  qUn: 'un', qBag: 'saco', qBagP: 'sacos', qBucket: 'balde', qBucketP: 'baldes',
+  none: '-'
+}};
+function T(k) { var o = L[CONFIG.lang] || L.pt; return o[k] != null ? o[k] : (L.pt[k] != null ? L.pt[k] : k); }
+/* =====================================================================
+   UTILITÁRIOS
+   ===================================================================== */
+function $(s, r) { return (r || document).querySelector(s); }
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function num(v) {
+  if (typeof v === 'number') return isFinite(v) ? v : 0;
+  var s = String(v == null ? '' : v).replace(/\s/g, '');
+  if (!s) return 0;
+  if (s.indexOf(',') > -1) s = s.replace(/\./g, '').replace(',', '.');
+  var n = parseFloat(s);
+  return isFinite(n) ? n : 0;
+}
+function round2(v) { return Math.round((v + 1e-9) * 100) / 100; }
+function fmtMoney(v) {
+  try {
+    return new Intl.NumberFormat(CONFIG.locale, { style: 'currency', currency: CONFIG.currency }).format(v).replace(/[  ]/g, ' ');
+  } catch (e) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+}
+function fmtN(v, d) {
+  d = d == null ? 2 : d;
+  try {
+    return new Intl.NumberFormat(CONFIG.locale, { minimumFractionDigits: d, maximumFractionDigits: d }).format(v).replace(/[  ]/g, ' ');
+  } catch (e) { return v.toFixed(d).replace('.', ','); }
+}
+function pad(n, l) { n = String(n); while (n.length < l) n = '0' + n; return n; }
+function fmtDate(d) { return pad(d.getDate(), 2) + '/' + pad(d.getMonth() + 1, 2) + '/' + d.getFullYear(); }
+function ymd(d) { return d.getFullYear() + pad(d.getMonth() + 1, 2) + pad(d.getDate(), 2); }
+function slug(s) {
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
+}
+function hex2rgb(h) {
+  var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(h || '');
+  return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [185, 28, 28];
+}
+// texto seguro para fontes padrão do PDF (Latin-1): troca aspas "inteligentes" do iPhone e remove emojis
+function pdfSafe(s) {
+  return String(s == null ? '' : s)
+    .replace(/[‘’‛]/g, "'").replace(/[“”„]/g, '"')
+    .replace(/[–—−]/g, '-').replace(/…/g, '...').replace(/[•·]/g, '-')
+    .replace(/×/g, 'x')
+    .replace(/[^\n\x20-\x7E -ÿ]/g, '');
+}
+function toast(msg) {
+  var t = $('#toast'); t.textContent = msg; t.className = 'toast show';
+  clearTimeout(toast._t); toast._t = setTimeout(function () { t.className = 'toast'; }, 3200);
+}
+
+/* =====================================================================
+   ARMAZENAMENTO (localStorage com try/catch e memória como reserva)
+   ===================================================================== */
+var mem = {}, storageOk = true;
+function sGet(k) { try { return window.localStorage.getItem(k); } catch (e) { storageOk = false; return mem[k] || null; } }
+function sSet(k, v) { try { window.localStorage.setItem(k, v); } catch (e) { storageOk = false; mem[k] = v; } }
+
+var TYPES = ['alv', 'reb', 'con', 'imp', 'dem'];
+function newRoom(n) {
+  return {
+    id: 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    name: n === 1 ? T('room1') : T('roomN') + ' ' + n,
+    type: 'alv', w: '', l: '', h: '2,70', doors: '0', windows: '0', faces: '1', cm: '4'
+  };
+}
+function defState() {
+  return {
+    v: 1, counter: 0,
+    profile: { name: '', phone: '', color: '#b91c1c', logo: '', logoW: 0, logoH: 0 },
+    prices: { labAlv: '55', labReb: '40', labCon: '35', labImp: '45', labDem: '30', extra: '', block: '1,5', cement: '38', sand: '130', imper: '190' },
+    doc: { number: 0, client: '', addr: '', validity: String(D.validityDays), payment: T('paymentDefault'), notes: '', rooms: [newRoom(1)] }
+  };
+}
+function sanitize(raw) {
+  var d = defState();
+  if (!raw || typeof raw !== 'object') return d;
+  ['profile', 'prices'].forEach(function (k) {
+    if (raw[k] && typeof raw[k] === 'object') Object.keys(d[k]).forEach(function (f) { if (raw[k][f] != null) d[k][f] = raw[k][f]; });
+  });
+  if (raw.doc && typeof raw.doc === 'object') {
+    ['client', 'addr', 'validity', 'payment', 'notes'].forEach(function (f) { if (raw.doc[f] != null) d.doc[f] = String(raw.doc[f]); });
+    d.doc.number = Math.max(0, parseInt(raw.doc.number, 10) || 0);
+    var rooms = Array.isArray(raw.doc.rooms) ? raw.doc.rooms.filter(function (x) { return x && typeof x === 'object'; }) : [];
+    d.doc.rooms = rooms.length ? rooms.slice(0, CONFIG.maxRooms).map(function (r, i) {
+      var base = newRoom(i + 1);
+      Object.keys(base).forEach(function (f) { if (r[f] != null && f !== 'id') base[f] = String(r[f]); });
+      if (TYPES.indexOf(base.type) < 0) base.type = 'alv';
+      if (typeof r.id === 'string' && /^r[a-z0-9]+$/.test(r.id)) base.id = r.id;
+      return base;
+    }) : [newRoom(1)];
+  }
+  d.counter = Math.max(0, parseInt(raw.counter, 10) || 0);
+  return d;
+}
+var S;
+try { S = sanitize(JSON.parse(sGet(CONFIG.storageKey) || 'null')); } catch (e) { S = defState(); }
+
+var saveT = null;
+function save() { try { sSet(CONFIG.storageKey, JSON.stringify(S)); } catch (e) { storageOk = false; } }
+function scheduleSave() { clearTimeout(saveT); saveT = setTimeout(save, 250); }
+
+/* =====================================================================
+   CÁLCULOS
+   ===================================================================== */
+function calcRoom(r) {
+  var w = num(r.w), l = num(r.l), h = num(r.h);
+  var doors = Math.max(0, Math.floor(num(r.doors))), wins = Math.max(0, Math.floor(num(r.windows)));
+  var faces = Math.min(4, Math.max(1, Math.floor(num(r.faces)) || 1));
+  var cm = num(r.cm); if (!(cm > 0) || cm > 30) cm = 4;
+  var c = { type: r.type, qty: 0, unit: 'm²', faces: faces, cm: cm, blocks: 0, cem: 0, sand: 0, impKg: 0 };
+  if (r.type === 'alv' || r.type === 'reb') {
+    var a = l * h - doors * D.doorM2 - wins * D.windowM2;
+    if (!(l > 0) || !(h > 0) || !(a > 0)) a = 0;
+    c.qty = round2(a * (r.type === 'reb' ? faces : 1));
+  } else if (w > 0 && l > 0) {
+    c.qty = round2(w * l);
+  }
+  if (c.qty > 0) {
+    if (r.type === 'alv') {
+      c.blocks = c.qty * D.alvBlocks * (1 + D.alvWastePct / 100);
+      c.cem = c.qty * D.alvCem; c.sand = c.qty * D.alvSand;
+    } else if (r.type === 'reb') {
+      c.cem = c.qty * D.rebCem; c.sand = c.qty * D.rebSand;
+    } else if (r.type === 'con') {
+      c.cem = c.qty * cm * D.conCemCm; c.sand = c.qty * cm * D.conSandCm;
+    } else if (r.type === 'imp') {
+      c.impKg = c.qty * D.impKg;
+    }
+  }
+  return c;
+}
+function up(v) { return Math.max(0, Math.ceil(v - 1e-9)) || 0; }
+function calcAll() {
+  var P = S.prices;
+  var rooms = S.doc.rooms.map(function (r) { return { r: r, c: calcRoom(r) }; });
+  var s = { blocks: 0, cem: 0, sand: 0, impKg: 0 }, qty = { alv: 0, reb: 0, con: 0, imp: 0, dem: 0 }, mats = [];
+  rooms.forEach(function (x) {
+    Object.keys(s).forEach(function (k) { s[k] += x.c[k]; });
+    qty[x.r.type] = (qty[x.r.type] || 0) + x.c.qty;
+  });
+  var q = { blocks: up(s.blocks), bags: up(s.cem), sand: Math.max(0, Math.ceil(s.sand * 10 - 1e-9) / 10) || 0, buckets: up(s.impKg / D.impBucketKg) };
+  if (q.blocks > 0) mats.push({ label: T('u_block'), qty: q.blocks + ' ' + T('qUn'), cost: round2(q.blocks * num(P.block)) });
+  if (q.bags > 0) mats.push({ label: T('u_cement'), qty: q.bags + ' ' + (q.bags === 1 ? T('qBag') : T('qBagP')), cost: round2(q.bags * num(P.cement)) });
+  if (q.sand > 0) mats.push({ label: T('u_sand'), qty: fmtN(q.sand, 1) + ' m³', cost: round2(q.sand * num(P.sand)) });
+  if (q.buckets > 0) mats.push({ label: T('u_imper'), qty: q.buckets + ' ' + (q.buckets === 1 ? T('qBucket') : T('qBucketP')), cost: round2(q.buckets * num(P.imper)) });
+  var matCost = round2(mats.reduce(function (a, m) { return a + m.cost; }, 0));
+  var unitP = { alv: num(P.labAlv), reb: num(P.labReb), con: num(P.labCon), imp: num(P.labImp), dem: num(P.labDem) }, lab = [], labTotal = 0;
+  TYPES.forEach(function (t) {
+    var a = round2(qty[t] || 0);
+    if (a > 0) { var cst = round2(a * unitP[t]); lab.push({ type: t, qty: a, unit: 'm²', price: unitP[t], cost: cst }); labTotal += cst; }
+  });
+  labTotal = round2(labTotal);
+  var area = round2(lab.reduce(function (a, x) { return a + x.qty; }, 0)), extra = round2(num(P.extra));
+  return { rooms: rooms, area: area, q: q, mats: mats, matCost: matCost, lab: lab, labTotal: labTotal, extra: extra, total: round2(labTotal + matCost + extra) };
+}
+/* =====================================================================
+   INTERFACE
+   ===================================================================== */
+function applyTexts() {
+  var i, els = document.querySelectorAll('[data-t]');
+  for (i = 0; i < els.length; i++) els[i].textContent = T(els[i].getAttribute('data-t'));
+  els = document.querySelectorAll('[data-ph]');
+  for (i = 0; i < els.length; i++) els[i].setAttribute('placeholder', T(els[i].getAttribute('data-ph')));
+  document.title = T('appTitle');
+}
+function scopeText(r, c) {
+  if (r.type === 'alv') return T('scAlv');
+  if (r.type === 'reb') return T('scReb') + ', ' + c.faces + ' ' + (c.faces === 1 ? T('scFace') : T('scFaces'));
+  if (r.type === 'con') return T('scCon') + ' ' + fmtN(c.cm, 0) + ' cm';
+  if (r.type === 'imp') return T('scImp');
+  return T('scDem');
+}
+function roomHtml(r, canDel) {
+  function f(lab, key, ph, mode) {
+    return '<label class="f"><span>' + esc(lab) + '</span><input type="text" inputmode="' + (mode || 'decimal') + '" data-f="' + key +
+      '" value="' + esc(r[key]) + '" placeholder="' + esc(ph || '') + '" autocomplete="off"></label>';
+  }
+  var types = TYPES.map(function (t) { return '<option value="' + t + '"' + (r.type === t ? ' selected' : '') + '>' + esc(T('t_' + t)) + '</option>'; }).join('');
+  var body = '';
+  if (r.type === 'alv') {
+    body = '<div class="grid3">' + f(T('fL'), 'l', '4,0') + f(T('fH'), 'h', '2,70') + f(T('fDoors'), 'doors', '0', 'numeric') + '</div>' +
+      '<div class="grid2">' + f(T('fWins'), 'windows', '0', 'numeric') + '</div>';
+  } else if (r.type === 'reb') {
+    body = '<div class="grid3">' + f(T('fL'), 'l', '4,0') + f(T('fH'), 'h', '2,70') + f(T('fDoors'), 'doors', '0', 'numeric') + '</div>' +
+      '<div class="grid2">' + f(T('fWins'), 'windows', '0', 'numeric') + f(T('fFaces'), 'faces', '1', 'numeric') + '</div>';
+  } else if (r.type === 'con') {
+    body = '<div class="grid3">' + f(T('fW'), 'w', '3,5') + f(T('fL'), 'l', '4,0') + f(T('fCm'), 'cm', '4', 'decimal') + '</div>';
+  } else {
+    body = '<div class="grid2">' + f(T('fW'), 'w', '3,5') + f(T('fL'), 'l', '4,0') + '</div>';
+  }
+  return '<div class="rhead"><input class="rname" type="text" data-f="name" maxlength="40" value="' + esc(r.name) + '" aria-label="' + esc(T('roomName')) + '">' +
+    (canDel ? '<button class="btn small ghost" type="button" data-act="del">' + esc(T('roomDel')) + '</button>' : '') + '</div>' +
+    '<label class="f"><span>' + esc(T('typeLabel')) + '</span><select data-f="type">' + types + '</select></label>' + body +
+    '<p class="hint" style="margin:0 0 6px">' + esc(T('estHint')) + '</p>' +
+    '<div class="res empty" id="res-' + r.id + '"></div>';
+}
+function renderRooms() {
+  var box = $('#rooms'); box.innerHTML = '';
+  S.doc.rooms.forEach(function (r) {
+    var d = document.createElement('div'); d.className = 'room'; d.setAttribute('data-id', r.id);
+    d.innerHTML = roomHtml(r, S.doc.rooms.length > 1);
+    box.appendChild(d);
+  });
+  var locked = S.doc.rooms.length >= CONFIG.maxRooms;
+  $('#btnAdd').textContent = locked && CONFIG.demo ? T('addRoomLocked') : T('addRoom');
+  $('#btnAdd').style.display = (locked && !CONFIG.demo) ? 'none' : '';
+  updateResults();
+}
+function updateResults() {
+  var A = calcAll();
+  A.rooms.forEach(function (x) {
+    var el = document.getElementById('res-' + x.r.id); if (!el) return;
+    if (x.c.qty > 0) {
+      el.className = 'res';
+      var txt = T('resArea') + ' ' + fmtN(x.c.qty) + ' m²';
+      if (x.c.blocks > 0) txt += ' · ' + up(x.c.blocks) + ' ' + T('resBlocks');
+      if (x.c.cem > 0) txt += ' · ' + fmtN(x.c.cem, 1) + ' ' + T('resCem');
+      if (x.c.impKg > 0) txt += ' · ' + fmtN(x.c.impKg, 0) + ' kg';
+      el.textContent = txt;
+    } else { el.className = 'res empty'; el.textContent = T('resEmpty'); }
+  });
+  var sum = $('#sum');
+  if (!(A.area > 0)) { sum.innerHTML = '<p class="hint" style="margin:0">' + esc(T('sNoData')) + '</p>'; }
+  else {
+    var rows = A.lab.map(function (x) {
+      return '<tr><td>' + esc(T('t_' + x.type)) + '<small>' + fmtN(x.qty) + ' ' + x.unit + ' × ' + fmtMoney(x.price) + '</small></td><td>' + fmtMoney(x.cost) + '</td></tr>';
+    }).join('');
+    if (A.matCost > 0) {
+      var det = A.mats.map(function (m) { return m.qty + ' ' + m.label.charAt(0).toLowerCase() + m.label.slice(1); }).join(' · ');
+      rows += '<tr><td>' + esc(T('sMat')) + '<small>' + esc(det) + '</small></td><td>' + fmtMoney(A.matCost) + '</td></tr>';
+    }
+    if (A.extra > 0) rows += '<tr><td>' + esc(T('sExtra')) + '</td><td>' + fmtMoney(A.extra) + '</td></tr>';
+    rows += '<tr class="tot"><td>' + esc(T('sTotal')) + '</td><td>' + fmtMoney(A.total) + '</td></tr>';
+    sum.innerHTML = '<table class="sum">' + rows + '</table>';
+  }
+  $('#barTotal').textContent = fmtMoney(A.total);
+}
+
+function onChange() { updateResults(); scheduleSave(); }
+
+function renderLogo() {
+  var box = $('#logoBox');
+  if (S.profile.logo) { box.innerHTML = ''; var im = new Image(); im.alt = 'logo'; im.src = S.profile.logo; box.appendChild(im); }
+  else { box.innerHTML = '<span>' + esc(T('noLogo')) + '</span>'; }
+}
+function fillInputs() {
+  $('#pName').value = S.profile.name; $('#pPhone').value = S.profile.phone; $('#pColor').value = S.profile.color || '#b91c1c';
+  $('#cName').value = S.doc.client; $('#cAddr').value = S.doc.addr;
+  [['#prLabAlv','labAlv'],['#prLabReb','labReb'],['#prLabCon','labCon'],['#prLabImp','labImp'],['#prLabDem','labDem'],['#prExtra','extra'],['#prBlock','block'],['#prCement','cement'],['#prSand','sand'],['#prImper','imper']].forEach(function (p) { $(p[0]).value = S.prices[p[1]]; });
+  $('#prValid').value = S.doc.validity; $('#prPay').value = S.doc.payment; $('#prNotes').value = S.doc.notes;
+  renderLogo(); renderRooms();
+}
+function bind(id, get) {
+  $(id).addEventListener('input', function (e) { get(e.target.value); onChange(); });
+}
+
+/* ---------- logo ---------- */
+function processLogo(file) {
+  return new Promise(function (ok, no) {
+    var fr = new FileReader();
+    fr.onerror = function () { no(new Error('read')); };
+    fr.onload = function () {
+      var img = new Image();
+      img.onerror = function () { no(new Error('img')); };
+      img.onload = function () {
+        var w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+        if (!w || !h) { no(new Error('size')); return; }
+        var k = Math.min(1, 600 / Math.max(w, h)), cw = Math.max(1, Math.round(w * k)), ch = Math.max(1, Math.round(h * k));
+        var c = document.createElement('canvas'); c.width = cw; c.height = ch;
+        var x = c.getContext('2d'), png = /png|gif|webp|svg/i.test(file.type || '');
+        if (!png) { x.fillStyle = '#fff'; x.fillRect(0, 0, cw, ch); }
+        x.drawImage(img, 0, 0, cw, ch);
+        try { ok({ data: png ? c.toDataURL('image/png') : c.toDataURL('image/jpeg', 0.88), w: cw, h: ch }); } catch (e) { no(e); }
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+/* ---------- modal ---------- */
+var modalCleanup = null;
+function openModal(html) {
+  $('#mdl').innerHTML = html; $('#ov').className = 'ov show';
+}
+function closeModal() {
+  $('#ov').className = 'ov';
+  if (modalCleanup) { try { modalCleanup(); } catch (e) {} modalCleanup = null; }
+}
+function showPaywall() {
+  var list = T('paywallList').map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
+  openModal('<h2>' + esc(T('paywallTitle')) + '</h2><p>' + esc(T('paywallBody')) + '</p><ul>' + list + '</ul>' +
+    (CONFIG.buyUrl
+      ? '<a class="btn primary block" target="_blank" rel="noopener" href="' + esc(CONFIG.buyUrl) + '">' + esc(T('paywallBuy')) + '</a>'
+      : '<p class="hint">' + esc(T('paywallNoLink')) + '</p>') +
+    '<button class="btn ghost block" type="button" data-close="1">' + esc(T('close')) + '</button>');
+}
+
+/* =====================================================================
+   PDF
+   ===================================================================== */
+var libP = null;
+function loadScript(u) {
+  return new Promise(function (ok, no) {
+    var s = document.createElement('script'); s.src = u; s.async = true;
+    s.onload = ok; s.onerror = function () { s.remove(); no(new Error('load')); };
+    document.head.appendChild(s);
+  });
+}
+function hasLib() { return !!(window.jspdf && window.jspdf.jsPDF); }
+function ensurePdfLib() {
+  if (hasLib()) return Promise.resolve();
+  if (libP) return libP;
+  libP = (async function () {
+    for (var i = 0; i < CONFIG.jsPdfUrls.length; i++) {
+      try { await loadScript(CONFIG.jsPdfUrls[i]); if (hasLib()) return; } catch (e) {}
+    }
+    libP = null; throw new Error('nolib');
+  })();
+  return libP;
+}
+
+function buildModel() {
+  var A = calcAll(), P = S.profile, dc = S.doc;
+  if (!dc.number) { S.counter = (S.counter || 0) + 1; dc.number = S.counter; }
+  var now = new Date(), vd = Math.max(1, Math.round(num(dc.validity)) || D.validityDays);
+  var until = new Date(now.getTime() + vd * 86400000);
+  var lines = A.lab.map(function (x) {
+    return { label: T('lineLabour'), detail: T('t_' + x.type) + ': ' + fmtN(x.qty) + ' ' + x.unit + ' x ' + fmtMoney(x.price) + '/' + x.unit, value: x.cost };
+  });
+  if (A.matCost > 0) lines.push({ label: T('lineMaterials'), detail: T('lineMatDetail'), value: A.matCost });
+  if (A.extra > 0) lines.push({ label: T('lineExtra'), detail: '', value: A.extra });
+  return {
+    number: pad(dc.number, 4), date: fmtDate(now), until: fmtDate(until), validityDays: vd, fileDate: ymd(now),
+    provider: { name: P.name || T('yourNameFallback'), phone: P.phone, logo: P.logo, logoW: P.logoW, logoH: P.logoH, color: P.color || '#b91c1c' },
+    client: { name: dc.client, addr: dc.addr },
+    rooms: A.rooms.filter(function (x) { return x.c.qty > 0; }).map(function (x) {
+      return { name: x.r.name || T('roomFallback'), area: x.c.qty, u: x.c.unit, scope: scopeText(x.r, x.c) };
+    }),
+    lines: lines, mats: A.mats, total: A.total, payment: dc.payment, notes: dc.notes, demo: CONFIG.demo
+  };
+}
+function buildPdf(m) {
+  var JS = window.jspdf && window.jspdf.jsPDF;
+  if (!JS) throw new Error('nolib');
+  var doc = new JS({ unit: 'mm', format: 'a4', orientation: 'portrait', compress: true });
+  var PW = 210, PH = 297, MG = 16, CW = PW - 2 * MG;
+  var col = hex2rgb(m.provider.color), GR = [107, 118, 132], DK = [24, 32, 42];
+  var y = MG, px = pdfSafe;
+  function setC(a) { doc.setTextColor(a[0], a[1], a[2]); }
+  function ensure(h) { if (y + h > PH - 24) { doc.addPage(); y = MG; } }
+  function section(title) {
+    ensure(14); doc.setFont('helvetica', 'bold'); doc.setFontSize(9); setC(col);
+    doc.text(px(title).toUpperCase(), MG, y); y += 5;
+  }
+
+  // cabeçalho: logo + dados do prestador (esquerda) e título/numero/datas (direita)
+  var y0 = y, textX = MG, logoH = 0;
+  if (m.provider.logo) {
+    try {
+      var lw = m.provider.logoW || 1, lh = m.provider.logoH || 1, k = Math.min(44 / lw, 22 / lh);
+      var w = lw * k, h = lh * k, fmt = /^data:image\/png/.test(m.provider.logo) ? 'PNG' : 'JPEG';
+      doc.addImage(m.provider.logo, fmt, MG, y0, w, h, 'logo', 'FAST');
+      textX = MG + w + 5; logoH = h;
+    } catch (e) { textX = MG; logoH = 0; }
+  }
+  var nameW = (PW - MG - 58) - textX;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(logoH ? 13 : 17); setC(DK);
+  var nameLines = doc.splitTextToSize(px(m.provider.name), nameW).slice(0, 3);
+  doc.text(nameLines, textX, y0 + 6);
+  var ny = y0 + 6 + nameLines.length * (logoH ? 5.5 : 7);
+  if (m.provider.phone) { doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(GR); doc.text(px(m.provider.phone), textX, ny); ny += 5; }
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(20); setC(col); doc.text(px(T('pdfTitle')), PW - MG, y0 + 7, { align: 'right' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(GR);
+  doc.text(px(T('pdfNumber')) + ' ' + m.number, PW - MG, y0 + 14, { align: 'right' });
+  doc.text(px(T('pdfDate')) + ': ' + m.date, PW - MG, y0 + 19, { align: 'right' });
+  doc.text(px(T('pdfValid')) + ': ' + m.until, PW - MG, y0 + 24, { align: 'right' });
+  y = Math.max(y0 + logoH + 4, ny, y0 + 28);
+  doc.setDrawColor(col[0], col[1], col[2]); doc.setLineWidth(0.8); doc.line(MG, y, PW - MG, y); y += 9;
+
+  // cliente
+  section(T('pdfClient'));
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12); setC(DK);
+  doc.text(px(m.client.name) || T('none'), MG, y); y += 5.5;
+  if (m.client.addr) {
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(GR);
+    var al = doc.splitTextToSize(px(m.client.addr), CW); doc.text(al, MG, y); y += al.length * 4.6;
+  }
+  y += 6;
+
+  // serviço (tabela de ambientes)
+  section(T('pdfService'));
+  doc.setFillColor(col[0], col[1], col[2]); doc.rect(MG, y, CW, 8, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(255, 255, 255);
+  doc.text(px(T('pdfColRoom')), MG + 2, y + 5.4);
+  doc.text(px(T('pdfColScope')), MG + 62, y + 5.4);
+  doc.text(px(T('pdfColArea')), MG + CW - 2, y + 5.4, { align: 'right' });
+  y += 8;
+  m.rooms.forEach(function (r, i) {
+    ensure(9);
+    if (i % 2 === 1) { doc.setFillColor(245, 247, 250); doc.rect(MG, y, CW, 8, 'F'); }
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(DK);
+    doc.text(doc.splitTextToSize(px(r.name), 56)[0] || '', MG + 2, y + 5.4);
+    doc.text(doc.splitTextToSize(px(r.scope), 80)[0] || '', MG + 62, y + 5.4);
+    doc.text(fmtN(r.area) + ' ' + r.u, MG + CW - 2, y + 5.4, { align: 'right' });
+    y += 8;
+  });
+  y += 8;
+
+  // mão de obra e materiais
+  section(T('pdfValues'));
+  m.lines.forEach(function (ln) {
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+    var dl = ln.detail ? doc.splitTextToSize(px(ln.detail), 84) : [];
+    var rh = Math.max(9, dl.length * 4.4 + 4.6);
+    ensure(rh + 1);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setC(DK); doc.text(px(ln.label), MG + 2, y + 5.6);
+    if (dl.length) { doc.setFont('helvetica', 'normal'); doc.setFontSize(9); setC(GR); doc.text(dl, MG + 58, y + 5.4); }
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10); setC(DK); doc.text(fmtMoney(ln.value), MG + CW - 2, y + 5.6, { align: 'right' });
+    y += rh; doc.setDrawColor(226, 230, 234); doc.setLineWidth(0.2); doc.line(MG, y, MG + CW, y);
+  });
+  y += 5; ensure(16);
+  doc.setFillColor(col[0], col[1], col[2]); doc.rect(MG, y, CW, 13, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.text(px(T('pdfTotal')), MG + 4, y + 8.4);
+  doc.setFontSize(15); doc.text(fmtMoney(m.total), MG + CW - 4, y + 8.8, { align: 'right' });
+  y += 20;
+
+  // lista de materiais (quantidades, sem preços unitários)
+  if (m.mats && m.mats.length) {
+    section(T('pdfMaterials'));
+    m.mats.forEach(function (it) {
+      ensure(8);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(DK); doc.text(doc.splitTextToSize(px(it.label), 110)[0] || '', MG + 2, y + 5);
+      doc.setFont('helvetica', 'bold'); doc.text(px(it.qty), MG + CW - 2, y + 5, { align: 'right' });
+      y += 7.5; doc.setDrawColor(226, 230, 234); doc.setLineWidth(0.2); doc.line(MG, y, MG + CW, y);
+    });
+    y += 8;
+  }
+
+  
+// condições
+  section(T('pdfConditions'));
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10); setC(DK);
+  var cond = [];
+  if (m.payment) cond.push(px(T('pdfPayment')) + ': ' + px(m.payment));
+  cond.push(px(T('pdfValidity')) + ': ' + m.validityDays + ' ' + px(T('pdfDays')) + ' (' + px(T('pdfValid')).toLowerCase() + ' ' + m.until + ').');
+  cond.forEach(function (c) { var cl = doc.splitTextToSize(c, CW); ensure(cl.length * 4.8 + 2); doc.text(cl, MG, y); y += cl.length * 4.8 + 1.5; });
+  if (m.notes) {
+    y += 3; ensure(14); doc.setFont('helvetica', 'bold'); doc.setFontSize(10); doc.text(px(T('pdfNotes')) + ':', MG, y); y += 5;
+    doc.setFont('helvetica', 'normal'); var nl = doc.splitTextToSize(px(m.notes), CW);
+    nl.forEach(function (ln) { ensure(5); doc.text(ln, MG, y); y += 4.8; });
+  }
+  y += 4; ensure(12);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); setC(GR);
+  var el = doc.splitTextToSize(px(T('pdfEstimate')), CW); doc.text(el, MG, y);
+
+  // rodapé em todas as páginas + marca d'água da demo
+  var total = doc.getNumberOfPages(), p;
+  for (p = 1; p <= total; p++) {
+    doc.setPage(p);
+    if (m.demo) {
+      try {
+        if (doc.GState && doc.setGState) doc.setGState(new doc.GState({ opacity: 0.09 }));
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(64); doc.setTextColor(40, 48, 58);
+        var tw = doc.getTextWidth(px(T('pdfWatermark'))), ang = 38, rad = ang * Math.PI / 180;
+        doc.text(px(T('pdfWatermark')), PW / 2 - (tw / 2) * Math.cos(rad), PH / 2 + (tw / 2) * Math.sin(rad), { angle: ang });
+        if (doc.GState && doc.setGState) doc.setGState(new doc.GState({ opacity: 1 }));
+      } catch (e) {}
+    }
+    doc.setDrawColor(226, 230, 234); doc.setLineWidth(0.2); doc.line(MG, PH - 17, PW - MG, PH - 17);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); setC(GR);
+    doc.text(px(T('pdfGenerated')) + ' ' + m.date, MG, PH - 12);
+    doc.text(px(T('pdfPage')) + ' ' + p + '/' + total, PW - MG, PH - 12, { align: 'right' });
+    if (m.demo) doc.text(px(T('pdfDemoFooter')), PW / 2, PH - 7.5, { align: 'center' });
+  }
+  var filename = 'Orcamento-' + (slug(m.client.name) || 'cliente') + '-' + m.fileDate + '.pdf';
+  return { doc: doc, filename: filename };
+}
+
+/* ---------- reserva: imprimir / salvar como PDF ---------- */
+function printSheetHtml(m) {
+  var rows = m.rooms.map(function (r) {
+    return '<tr><td>' + esc(r.name) + '</td><td>' + esc(r.scope) + '</td><td class="r">' + fmtN(r.area) + ' ' + esc(r.u) + '</td></tr>';
+  }).join('');
+  var lines = m.lines.map(function (l) {
+    return '<tr><td><b>' + esc(l.label) + '</b></td><td>' + esc(l.detail) + '</td><td class="r">' + fmtMoney(l.value) + '</td></tr>';
+  }).join('');
+  var mats = (m.mats && m.mats.length) ? '<table><tr><th colspan="2">' + esc(T('pdfMaterials')) + '</th></tr>' +
+    m.mats.map(function (it) { return '<tr><td>' + esc(it.label) + '</td><td class="r"><b>' + esc(it.qty) + '</b></td></tr>'; }).join('') + '</table>' : '';
+  return '<table><tr><td style="border:0">' + (m.provider.logo ? '<img src="' + esc(m.provider.logo) + '" alt="">' : '') +
+    '<h1 style="color:' + esc(m.provider.color) + '">' + esc(m.provider.name) + '</h1>' + esc(m.provider.phone) + '</td>' +
+    '<td class="r" style="border:0"><h1 style="color:' + esc(m.provider.color) + '">' + esc(T('pdfTitle')) + '</h1>' + esc(T('pdfNumber')) + ' ' + m.number + '<br>' +
+    esc(T('pdfDate')) + ': ' + m.date + '<br>' + esc(T('pdfValid')) + ': ' + m.until + '</td></tr></table>' +
+    '<p><b>' + esc(T('pdfClient')) + ':</b> ' + esc(m.client.name || T('none')) + (m.client.addr ? '<br>' + esc(m.client.addr) : '') + '</p>' +
+    '<table><tr><th>' + esc(T('pdfColRoom')) + '</th><th>' + esc(T('pdfColScope')) + '</th><th class="r">' + esc(T('pdfColArea')) + '</th></tr>' + rows + '</table>' +
+    '<table><tr><th colspan="3">' + esc(T('pdfValues')) + '</th></tr>' + lines +
+    '<tr class="tot"><td colspan="2">' + esc(T('pdfTotal')) + '</td><td class="r">' + fmtMoney(m.total) + '</td></tr></table>' + mats +
+    (m.payment ? '<p><b>' + esc(T('pdfPayment')) + ':</b> ' + esc(m.payment) + '</p>' : '') +
+    '<p><b>' + esc(T('pdfValidity')) + ':</b> ' + m.validityDays + ' ' + esc(T('pdfDays')) + ' (' + m.until + ')</p>' +
+    (m.notes ? '<p><b>' + esc(T('pdfNotes')) + ':</b> ' + esc(m.notes).replace(/\n/g, '<br>') + '</p>' : '') +
+    '<p class="wm">' + esc(T('pdfEstimate')) + (m.demo ? '<br>' + esc(T('pdfDemoFooter')) : '') + '</p>';
+}
+
+function showFallback(m) {
+  openModal('<h2>' + esc(T('fbTitle')) + '</h2><p>' + esc(T('fbBody')) + '</p>' +
+    '<button class="btn primary block" type="button" data-act="print">' + esc(T('fbPrint')) + '</button>' +
+    '<button class="btn ghost block" type="button" data-close="1">' + esc(T('close')) + '</button>');
+  $('#printSheet').innerHTML = printSheetHtml(m);
+}
+
+/* ---------- entrega do PDF ---------- */
+function triggerDownload(url, filename) {
+  var a = document.createElement('a'); a.href = url; a.download = filename; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 600);
+}
+function showResult(blob, filename) {
+  var url = URL.createObjectURL(blob), file = null, canShare = false;
+  try {
+    if (typeof File === 'function') {
+      file = new File([blob], filename, { type: 'application/pdf' });
+      canShare = !!(navigator.share && navigator.canShare && navigator.canShare({ files: [file] }));
+    }
+  } catch (e) { canShare = false; }
+  openModal('<h2>' + esc(T('resTitle')) + '</h2><p class="hint" style="margin-top:0">' + esc(filename) + ' · ' + Math.max(1, Math.round(blob.size / 1024)) + ' KB</p>' +
+    (canShare ? '<button class="btn primary block" type="button" data-act="share">' + esc(T('btnShare')) + '</button>' : '') +
+    '<button class="btn ' + (canShare ? '' : 'primary ') + 'block" type="button" data-act="down">' + esc(T('btnDownload')) + '</button>' +
+    '<a class="btn ghost block" target="_blank" rel="noopener" href="' + url + '">' + esc(T('btnOpen')) + '</a>' +
+    '<p class="hint">' + esc(T('resHint')) + '</p>' +
+    '<button class="btn ghost block" type="button" data-close="1" style="margin-top:12px">' + esc(T('close')) + '</button>');
+  modalCleanup = function () { setTimeout(function () { URL.revokeObjectURL(url); }, 1000); };
+  $('#mdl').onclick = function (e) {
+    var b = e.target.closest ? e.target.closest('[data-act]') : null; if (!b) return;
+    if (b.getAttribute('data-act') === 'down') { triggerDownload(url, filename); }
+    if (b.getAttribute('data-act') === 'share' && file) {
+      navigator.share({ files: [file], title: filename }).catch(function (err) { if (!err || err.name !== 'AbortError') toast(T('shareFail')); });
+    }
+  };
+}
+
+async function onGenerate() {
+  var A = calcAll();
+  if (!(A.area > 0)) { toast(T('needData')); return; }
+  var m = buildModel(); save();
+  var btn = $('#btnPdf'); btn.disabled = true;
+  try {
+    await ensurePdfLib();
+    var out = buildPdf(m);
+    showResult(out.doc.output('blob'), out.filename);
+  } catch (e) {
+    showFallback(m);
+  } finally { btn.disabled = false; }
+}
+
+/* =====================================================================
+   ÍCONE E "ADICIONAR À TELA INICIAL"
+   ===================================================================== */
+function makeIcon(size) {
+  var c = document.createElement('canvas'); c.width = c.height = size;
+  var x = c.getContext('2d'), s = size / 512;
+  function rr(a, b, w, h, r) {
+    x.beginPath(); x.moveTo(a + r, b); x.arcTo(a + w, b, a + w, b + h, r); x.arcTo(a + w, b + h, a, b + h, r);
+    x.arcTo(a, b + h, a, b, r); x.arcTo(a, b, a + w, b, r); x.closePath(); x.fill();
+  }
+  x.fillStyle = '#b91c1c'; x.fillRect(0, 0, size, size);
+  x.fillStyle = '#ffffff'; rr(96 * s, 96 * s, 320 * s, 320 * s, 34 * s);
+  x.fillStyle = '#b91c1c';
+  rr(128 * s, 134 * s, 120 * s, 56 * s, 8 * s); rr(260 * s, 134 * s, 124 * s, 56 * s, 8 * s);
+  rr(128 * s, 228 * s, 56 * s, 56 * s, 8 * s); rr(196 * s, 228 * s, 120 * s, 56 * s, 8 * s); rr(328 * s, 228 * s, 56 * s, 56 * s, 8 * s);
+  rr(128 * s, 322 * s, 120 * s, 56 * s, 8 * s); rr(260 * s, 322 * s, 124 * s, 56 * s, 8 * s);
+  return c.toDataURL('image/png');
+}
+function setupPwa() {
+  try {
+    var i180 = makeIcon(180), l = document.createElement('link');
+    l.rel = 'apple-touch-icon'; l.href = i180; document.head.appendChild(l);
+    var ic = document.createElement('link'); ic.rel = 'icon'; ic.href = i180; document.head.appendChild(ic);
+    var man = {
+      name: T('appTitle'), short_name: 'Orçamento Reforma', display: 'standalone',
+      start_url: location.href.split('#')[0].split('?')[0], background_color: '#f3f5f7', theme_color: '#b91c1c',
+      icons: [{ src: makeIcon(192), sizes: '192x192', type: 'image/png' }, { src: makeIcon(512), sizes: '512x512', type: 'image/png' }]
+    };
+    var ml = document.createElement('link'); ml.rel = 'manifest';
+    ml.href = URL.createObjectURL(new Blob([JSON.stringify(man)], { type: 'application/manifest+json' }));
+    document.head.appendChild(ml);
+  } catch (e) {}
+}
+
+/* =====================================================================
+   EVENTOS
+   ===================================================================== */
+function wire() {
+  bind('#pName', function (v) { S.profile.name = v; });
+  bind('#pPhone', function (v) { S.profile.phone = v; });
+  bind('#pColor', function (v) { S.profile.color = v; });
+  bind('#cName', function (v) { S.doc.client = v; });
+  bind('#cAddr', function (v) { S.doc.addr = v; });
+  [['#prLabAlv','labAlv'],['#prLabReb','labReb'],['#prLabCon','labCon'],['#prLabImp','labImp'],['#prLabDem','labDem'],['#prExtra','extra'],['#prBlock','block'],['#prCement','cement'],['#prSand','sand'],['#prImper','imper']].forEach(function (p) {
+    bind(p[0], function (v) { S.prices[p[1]] = v; });
+  });
+  bind('#prValid', function (v) { S.doc.validity = v; });
+  bind('#prPay', function (v) { S.doc.payment = v; });
+  bind('#prNotes', function (v) { S.doc.notes = v; });
+
+  function roomEvt(e) {
+    var t = e.target, card = t.closest ? t.closest('.room') : null;
+    if (!card || !t.getAttribute('data-f')) return;
+    var id = card.getAttribute('data-id'), r = null, i;
+    for (i = 0; i < S.doc.rooms.length; i++) if (S.doc.rooms[i].id === id) r = S.doc.rooms[i];
+    if (!r) return;
+    r[t.getAttribute('data-f')] = t.type === 'checkbox' ? t.checked : t.value;
+    if (t.getAttribute('data-f') === 'type') { renderRooms(); scheduleSave(); return; }
+    onChange();
+  }
+  $('#rooms').addEventListener('input', roomEvt);
+  $('#rooms').addEventListener('change', roomEvt);
+  $('#rooms').addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-act="del"]') : null; if (!b) return;
+    var id = b.closest('.room').getAttribute('data-id');
+    S.doc.rooms = S.doc.rooms.filter(function (r) { return r.id !== id; });
+    if (!S.doc.rooms.length) S.doc.rooms.push(newRoom(1));
+    renderRooms(); scheduleSave();
+  });
+  $('#btnAdd').addEventListener('click', function () {
+    if (S.doc.rooms.length >= CONFIG.maxRooms) { showPaywall(); return; }
+    S.doc.rooms.push(newRoom(S.doc.rooms.length + 1)); renderRooms(); scheduleSave();
+  });
+
+  $('#logoFile').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    processLogo(f).then(function (o) {
+      S.profile.logo = o.data; S.profile.logoW = o.w; S.profile.logoH = o.h; renderLogo(); save();
+    }).catch(function () { toast(T('logoError')); });
+    e.target.value = '';
+  });
+  $('#logoDel').addEventListener('click', function () {
+    S.profile.logo = ''; S.profile.logoW = 0; S.profile.logoH = 0; renderLogo(); save();
+  });
+
+  $('#btnPdf').addEventListener('click', onGenerate);
+  $('#btnNew').addEventListener('click', function () {
+    if (!window.confirm(T('confirmNew'))) return;
+    S.doc.client = ''; S.doc.addr = ''; S.doc.number = 0; S.doc.rooms = [newRoom(1)];
+    fillInputs(); save();
+  });
+  $('#btnExport').addEventListener('click', function () {
+    var blob = new Blob([JSON.stringify({ app: 'orcreforma', v: 1, data: S })], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    triggerDownload(url, 'backup-orcamento-reforma-' + ymd(new Date()) + '.json');
+    setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+  });
+  $('#importFile').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    var fr = new FileReader();
+    fr.onload = function () {
+      try {
+        var j = JSON.parse(fr.result);
+        if (!j || j.app !== 'orcreforma' || !j.data || !j.data.profile || !j.data.doc) throw new Error('bad');
+        S = sanitize(j.data); fillInputs(); save(); toast(T('backupOk'));
+      } catch (err) { toast(T('backupBad')); }
+    };
+    fr.onerror = function () { toast(T('backupBad')); };
+    fr.readAsText(f); e.target.value = '';
+  });
+
+  $('#ov').addEventListener('click', function (e) {
+    if (e.target.id === 'ov' || (e.target.closest && e.target.closest('[data-close]'))) { closeModal(); return; }
+    var b = e.target.closest ? e.target.closest('[data-act="print"]') : null;
+    if (b) { try { window.print(); } catch (err) {} }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') save(); });
+  window.addEventListener('pagehide', save);
+}
+
+/* =====================================================================
+   INÍCIO
+   ===================================================================== */
+applyTexts();
+$('#demoBadge').style.display = CONFIG.demo ? '' : 'none';
+(function(){var b=$('#buyTop');if(CONFIG.demo&&CONFIG.buyUrl){b.href=CONFIG.buyUrl;b.textContent=T('buyTop');b.style.display='';}})();
+fillInputs();
+wire();
+setupPwa();
+if (!S.profile.name) $('#cProfile').setAttribute('open', '');
+if (!storageOk) $('#storWarn').style.display = 'block';
+ensurePdfLib().catch(function () {});
+})();
+</script>
+</body>
+</html>
